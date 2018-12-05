@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"></head>
+
+<body>
+<div class="container">
+    <nav th:replace="includes/header :: navig"></nav>
+    <div class="card">
+
+        <div class="card-header">
+            <h1 class="card-title">Nuevo libro</h1>
+        </div>
+
+        <div class="card-body">
+            <form th:object="${libroForm}" method="post">
+                <div class="container">
+                    <div class="form-group">
+                        <label th:for="${#ids.next('titulo')}">Título</label>
+                        <input th:field="*{titulo}" type="text" class="form-control" placeholder="Título del libro"
+                               th:errorclass="error"/>
+                        <p th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" th:errorclass="error">Error con
+                            el
+                            título del libro</p>
+                        <p class="help-block">Ingresá el título del libro.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:for="${#ids.next('isbn')}">ISBN</label>
+                        <input th:field="*{isbn}" type="text" class="form-control" placeholder="ISBN del libro"
+                               th:errorclass="error"/>
+                        <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" th:errorclass="error">Error con el
+                            ISBN del libro</p>
+                        <p class="help-block">Ingresá el ISBN del libro.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="select-autor" th:for="${#ids.next('autor')}">Autor</label>
+                        <select id="select-autor" class="form-control" th:field="*{autor}"
+                                th:errorclass="error">
+                            <option value="">Select</option>
+                            <option th:each="autor : ${autores}"
+                                    th:value="${autor.id}"
+                                    th:text="${autor.apellido + ', ' + autor.nombre}"
+                                    th:selected="${autor.id} == ${libroForm.autor}"></option>
+                        </select>
+                        <p th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}" th:errorclass="error">Error con el
+                            Autor del libro</p>
+                        <p class="help-block">Seleccioná el autor del libro.</p>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <button class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+
+</body>
+</html>

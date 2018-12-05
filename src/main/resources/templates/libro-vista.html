@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"></head>
+
+<body>
+<div class="container">
+    <nav th:replace="includes/header :: navig"></nav>
+    <div class="card">
+
+        <div class="card-header">
+            <h1 class="card-title">Detalle del libro</h1>
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Título</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${libro.titulo}">Rayuela</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">ISBN</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${libro.isbn}">1111</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Fecha creación</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${#dates.format(libro.createdOn, 'dd/MM/yyyy hh:mm a')}">Jueves 17 de Agosto de 2017</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Fecha última modificación</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${#dates.format(libro.modifiedOn, 'dd/MM/yyyy hh:mm a')}">Jueves 17 de Agosto de 2017</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Autor</div>
+                    <div class="col col-sm-auto">
+                        <a th:href="@{'/autores/' + ${libro.autor.id}}"
+                           th:text="${libro.autor.nombre + ' ' + libro.autor.apellido}">J.R.R. Tolkien</a>
+                    </div>
+                </div>
+            </div>
+
+            <p/>
+
+            <div class="container">
+                <a class="btn btn-primary"
+                   th:href="@{'/libros/' + ${libro.id} + '/editar'}">Editar
+                </a>
+
+                <a class="btn btn-danger"
+                   th:href="@{'/libros/' + ${libro.id} + '/borrar'}">Borrar
+                </a>
+
+                <a class="btn btn-outline-primary"
+                   th:href="@{/libros}">Listado
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div th:replace="includes/footer :: footer"></div>
+
+</body>
+</html>

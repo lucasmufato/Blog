@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"></head>
+
+<body>
+<div class="container">
+    <nav th:replace="includes/header :: navig"></nav>
+
+    <div class="card">
+
+        <div class="card-header">
+            <h1 class="card-title">Página de inicio</h1>
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+                <ul>
+                    <li>
+                        <a href="/libros"
+                           th:href="@{libros}">ABM Libros</a>
+                    </li>
+                    <li>
+                        <a href="/autores"
+                           th:href="@{autores}">ABM Autores</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="includes/footer :: footer">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"></head>
+
+<body>
+<div class="container">
+    <nav th:replace="includes/header :: navig"></nav>
+    <div class="card">
+
+        <div class="card-header">
+            <h1 class="card-title">Detalle del autor</h1>
+        </div>
+
+        <div class="card-body">
+            <div class="container">
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Apellido</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${autor.apellido}">Tolkien</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Nombre</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${autor.nombre}">J.R.R.</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Fecha creación</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${#dates.format(autor.createdOn, 'dd/MM/yyyy hh:mm a')}">Jueves 17 de Agosto de 2017</span>
+                    </div>
+                </div>
+                <div class="row justify-content-sm-start">
+                    <div class="col col-sm-3">Fecha última modificación</div>
+                    <div class="col col-sm-auto">
+                        <span th:text="${#dates.format(autor.modifiedOn, 'dd/MM/yyyy hh:mm a')}">Jueves 17 de Agosto de 2017</span>
+                    </div>
+                </div>
+            </div>
+            <p/>
+            <div class="container" th:unless="${#lists.isEmpty(autor.libros)}">
+                <h3>Libros del autor</h3>
+                <ul>
+                    <li th:each="libro : ${autor.libros}">
+                        <a th:href="@{'/libros/' + ${libro.id} + ''}" th:text="${libro.titulo}">Un libro</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="container">
+                <a class="btn btn-primary"
+                   th:href="@{'/autores/' + ${autor.id} + '/editar'}">Editar
+                </a>
+
+                <a class="btn btn-danger"
+                   th:href="@{'/autores/' + ${autor.id} + '/borrar'}">Borrar
+                </a>
+
+                <a class="btn btn-outline-primary"
+                   th:href="@{/autores}">Listado
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+
+</body>
+</html>

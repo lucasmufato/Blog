@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/header :: header"></head>
+
+<body>
+<div class="container">
+    <nav th:replace="includes/header :: navig"></nav>
+    <div class="alert alert-danger">
+        <p th:text="'There was an unexpected error (type=' + ${error} + ', status=' + ${status} + '):'">
+            <i th:text="${message}"></i>
+        </p>
+        <p>Click <a href="/" th:href="@{/}">here</a> to go to home page</p>
+    </div>
+</div>
+
+<div th:replace="includes/footer :: footer">
+
+</div>
+</body>
+</html>
